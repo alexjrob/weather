@@ -3,6 +3,9 @@
 **Installation**
 Download dependencies
 `npm ci`
+Update config file
+`cp .test.env .prod.env`
+Then edit the `.prod.env` file to add valid credentials
 
 **Test code**
 Run Jest tests and validate OpenAPI documentation
