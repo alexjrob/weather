@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-import { GeoResponse, WeatherResponse } from '../types';
+import { GeoResponse, WeatherInfo, WeatherResponse } from '../types';
 import { WEATHER_APP_ID } from './config';
 
 async function resolveLocationName(location: string) {
@@ -19,7 +19,7 @@ async function resolveLocationName(location: string) {
     return result[0];
 }
 
-async function getGeoWeather(lat: number, lon: number) {
+async function getGeoWeather(lat: number, lon: number): Promise<WeatherInfo> {
 
     const params = {
         appid: WEATHER_APP_ID,
@@ -33,7 +33,16 @@ async function getGeoWeather(lat: number, lon: number) {
 
     const result = await request.json() as WeatherResponse;
     console.log('Response body:', JSON.stringify(result, null, 4));
-    return result.main;
+    return {
+        clouds: result.clouds.all,
+        main: result.main,
+        weather: result.weather.map( weather => {
+            return {
+                main: weather.main,
+                description: weather.description,
+            }
+        })
+    }
 }
 
 async function getLocationWeather(location: string) {

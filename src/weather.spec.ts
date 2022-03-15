@@ -38,6 +38,13 @@ describe('Weather API', () =>{
     describe('getGeoWeather', () => {
         it('Returns the weather for a lat/lon', async () => {
             const response = new Response(JSON.stringify({
+                clouds: { all: 1 },
+                weather: [{
+                    id: 10,
+                    icon: 'test-icon',
+                    main: 'Test weather status',
+                    description: 'Test weather description',
+                }],
                 main: {
                     temp: 321,
                     pressure: 5234,
@@ -53,11 +60,18 @@ describe('Weather API', () =>{
                 `http://api.openweathermap.org/data/2.5/weather?appid=test-weather-app-id&lat=1&lon=2`
             );
             expect(result).toEqual({
-                temp: 321,
-                pressure: 5234,
-                humidity: 5123,
-                temp_min: 8293,
-                temp_max: 12,
+                weather: [{
+                    main: 'Test weather status',
+                    description: 'Test weather description',
+                }],
+                clouds: 1,
+                main: {
+                    temp: 321,
+                    pressure: 5234,
+                    humidity: 5123,
+                    temp_min: 8293,
+                    temp_max: 12,
+                }
             })
         });
     });
@@ -75,6 +89,13 @@ describe('Weather API', () =>{
             );
             mockedFetch.mockResolvedValueOnce(
                 new Response(JSON.stringify({
+                    clouds: { all: 3 },
+                    weather: [{
+                        id: 11,
+                        icon: 'test-icon-2',
+                        main: 'Second test weather status',
+                        description: 'Second test weather description',
+                    }],
                     main: {
                         temp: 111,
                         pressure: 222,
@@ -88,11 +109,18 @@ describe('Weather API', () =>{
             const result = await getLocationWeather('test location');
 
             expect(result).toEqual({
-                temp: 111,
-                pressure: 222,
-                humidity: 333,
-                temp_min: 444,
-                temp_max: 555,
+                clouds: 3,
+                weather: [{
+                    main: 'Second test weather status',
+                    description: 'Second test weather description',
+                }],
+                main: {
+                    temp: 111,
+                    pressure: 222,
+                    humidity: 333,
+                    temp_min: 444,
+                    temp_max: 555,
+                }
             });
 
         });

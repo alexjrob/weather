@@ -9,6 +9,8 @@ app.get('/weather/:location', async (req, res) => {
     res.json(weather);
 });
 
+app.use(express.static('public'));
+
 app.listen(SERVER_PORT, () => {
     console.log(`Listening on http://localhost:${SERVER_PORT}/`);
 });

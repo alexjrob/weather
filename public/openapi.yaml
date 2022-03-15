@@ -1,0 +1,65 @@
+openapi: 3.0.0
+info:
+  title: Weather API
+  description: Tech test. Returns weather information for a given location
+  version: 0.0.1
+paths:
+  /weather/${locationName}:
+    parameters:
+      - name: locationName
+        in: path
+        required: true
+        description: The name of the location whose weather to get
+        schema:
+          type: string
+          example: Toronto
+    get:
+      summary: Returns the weather information for the given location
+      responses:
+        '200':
+          description: Weather information
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  clouds:
+                    type: number
+                    description: Cloudiness percentage
+                  weather:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        main:
+                          type: string
+                          description: Group of weather parameters (Rain, Snow, Extreme etc.)
+                        description:
+                          type: string
+                          description: Weather condition within the group
+                  main:
+                    type: object
+                    properties:
+                      temp:
+                        description: Temperature in Kelvin
+                        type: number
+                        example: 323
+                      pressure:
+                        description: Atmospheric pressure
+                        type: number
+                        example: 45
+                      humidity:
+                        description: Humidity percentage
+                        type: number
+                        example: 67
+
+                      temp_min:
+                        description: Minimum temperature at the moment in Kelvin.
+                        type: number
+                        example: 321
+
+                      temp_max:
+                        description: Maximum temperature at the moment in Kelvin.
+                        type: number
+                        example: 325
+
