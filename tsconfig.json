@@ -5,6 +5,10 @@
     "module": "commonjs",
     "target": "esnext",
     "allowJs": false,
-    "sourceMap": true
-  }
+    "sourceMap": true,
+    "lib": ["ESNext"]
+  },
+  "exclude":[
+    "./node_modules"
+  ]
 }

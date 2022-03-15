@@ -3,7 +3,6 @@ import { SERVER_PORT } from './config';
 import { getLocationWeather } from './weather';
 const app = express();
 
-
 app.get('/weather/:location', async (req, res) => {
     const { location } = req.params;
     const weather = await getLocationWeather(location);
