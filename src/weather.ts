@@ -2,6 +2,7 @@ import fetch from 'node-fetch';
 import { GeoResponse, WeatherInfo, WeatherResponse } from '../types';
 import { WEATHER_APP_ID } from './config';
 
+// Returns lat, lon for given location
 async function resolveLocationName(location: string) {
     const limit = 1;
     const params = {
@@ -19,6 +20,7 @@ async function resolveLocationName(location: string) {
     return result[0];
 }
 
+// Returns weather info for given lat, lon
 async function getGeoWeather(lat: number, lon: number): Promise<WeatherInfo> {
 
     const params = {
@@ -45,6 +47,7 @@ async function getGeoWeather(lat: number, lon: number): Promise<WeatherInfo> {
     }
 }
 
+// Returns weather info for given location
 async function getLocationWeather(location: string) {
     const {lat, lon} = await resolveLocationName(location);
     return getGeoWeather(lat, lon);
