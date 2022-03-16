@@ -7,7 +7,7 @@ async function resolveLocationName(location: string) {
     const limit = 1;
     const params = {
         appid: WEATHER_APP_ID,
-        location,
+        q: location,
         limit: limit.toString(),
     }
     const queryString = new URLSearchParams(params).toString();
