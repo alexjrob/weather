@@ -23,7 +23,7 @@ describe('Weather API', () =>{
 
             const result = await resolveLocationName('test-location');
             expect(mockedFetch).toHaveBeenCalledWith(
-                `http://api.openweathermap.org/geo/1.0/direct?appid=test-weather-app-id&location=test-location&limit=1`
+                `http://api.openweathermap.org/geo/1.0/direct?appid=test-weather-app-id&q=test-location&limit=1`
             );
             expect(result).toEqual({
                 lat: 0.01,
