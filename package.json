@@ -6,7 +6,7 @@
   "scripts": {
     "start": "NODE_ENV=production ts-node ./src/index.ts",
     "docs:validate": "swagger-cli validate public/openapi.yaml",
-    "test": "jest && docs:validate"
+    "test": "jest && npm run docs:validate"
   },
   "author": "",
   "license": "ISC",
